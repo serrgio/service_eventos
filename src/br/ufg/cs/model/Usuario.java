@@ -1,19 +1,22 @@
 package br.ufg.cs.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Created by José Sergio on 09/06/2016.
  */
+@XmlRootElement
 public class Usuario {
+
     private Long id;
     private String nome;
     private String senha;
     private String email;
     private Date dtNascimento;
-    private ArrayList<Endereco> lstEndereco;
+    private Endereco endereco;
+    private int perfil;
 
     public Long getId() {
         return id;
@@ -55,23 +58,32 @@ public class Usuario {
         this.dtNascimento = dtNascimento;
     }
 
-    public ArrayList<Endereco> getLstEndereco() {
-        return lstEndereco;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setLstEndereco(ArrayList<Endereco> lstEndereco) {
-        this.lstEndereco = lstEndereco;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public int getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(int perfil) {
+        this.perfil = perfil;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.nome);
-        hash = 97 * hash + Objects.hashCode(this.senha);
-        hash = 97 * hash + Objects.hashCode(this.email);
-        hash = 97 * hash + Objects.hashCode(this.dtNascimento);
-        hash = 97 * hash + Objects.hashCode(this.lstEndereco);
+        hash = 89 * hash + Objects.hashCode(this.id);
+        hash = 89 * hash + Objects.hashCode(this.nome);
+        hash = 89 * hash + Objects.hashCode(this.senha);
+        hash = 89 * hash + Objects.hashCode(this.email);
+        hash = 89 * hash + Objects.hashCode(this.dtNascimento);
+        hash = 89 * hash + Objects.hashCode(this.endereco);
+        hash = 89 * hash + this.perfil;
         return hash;
     }
 
@@ -87,6 +99,9 @@ public class Usuario {
             return false;
         }
         final Usuario other = (Usuario) obj;
+        if (this.perfil != other.perfil) {
+            return false;
+        }
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
@@ -102,7 +117,7 @@ public class Usuario {
         if (!Objects.equals(this.dtNascimento, other.dtNascimento)) {
             return false;
         }
-        if (!Objects.equals(this.lstEndereco, other.lstEndereco)) {
+        if (!Objects.equals(this.endereco, other.endereco)) {
             return false;
         }
         return true;
@@ -110,7 +125,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nome=" + nome + ", senha=" + senha + ", email=" + email + ", dtNascimento=" + dtNascimento + ", lstEndereco=" + lstEndereco + '}';
+        return "Usuario{" + "id=" + id + ", nome=" + nome + ", senha=" + senha + ", email=" + email + ", dtNascimento=" + dtNascimento + ", endereco=" + endereco + ", perfil=" + perfil + '}';
     }
-    
+
 }
