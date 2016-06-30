@@ -53,7 +53,7 @@ public class CtrUsuario {
         return objUsuario;
     }
 
-    public boolean UpdateUsuario(Usuario objUsuario) throws SQLException {
+    public boolean UpdateUsuario(String token, Usuario objUsuario) throws SQLException {
         boolean bRetorno = false;
 
         try (Connection conn = Conectar()) {
@@ -74,13 +74,13 @@ public class CtrUsuario {
         return bRetorno;
     }
 
-    public boolean DeleteUsuario(Integer idUsuario) throws SQLException {
+    public boolean DeleteUsuario(String token) throws SQLException {
         boolean bRetorno = false;
-
+        Usuario objUsuario = GetThread(token);
         try (Connection conn = Conectar()) {
             String sql = "DELETE FROM Usuario WHERE id=?";
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setInt(1, idUsuario);
+            statement.setLong(1, objUsuario.getId());
 
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {

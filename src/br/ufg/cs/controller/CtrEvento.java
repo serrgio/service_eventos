@@ -8,19 +8,19 @@ import java.sql.SQLException;
  */
 public class CtrEvento {
 
-    public boolean InsertEvento(Evento objEvento) throws SQLException {
+    public boolean InsertEvento(String token, Evento objEvento) throws SQLException {
         return true;
     }
 
-    public Evento GetEvento(String token) throws SQLException {
+    public Evento GetEvento(String token, int idEvento) throws SQLException {
         return null;
     }
 
-    public boolean UpdateEvento(Evento objEvento) throws SQLException {
+    public boolean UpdateEvento(String token, Evento objEvento) throws SQLException {
         return true;
     }
 
-    public boolean DeleteEvento(Integer idEvento) throws SQLException {
+    public boolean DeleteEvento(String token, Integer idEvento) throws SQLException {
         return true;
     }
 }
