@@ -104,10 +104,7 @@ public class Thread {
         if (!Objects.equals(this.dtCriacao, other.dtCriacao)) {
             return false;
         }
-        if (!Objects.equals(this.dtAlteracao, other.dtAlteracao)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.dtAlteracao, other.dtAlteracao);
     }
 
     @Override

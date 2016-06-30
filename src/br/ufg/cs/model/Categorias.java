@@ -77,10 +77,7 @@ public class Categorias {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.dtCadastro, other.dtCadastro)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.dtCadastro, other.dtCadastro);
     }
 
     @Override

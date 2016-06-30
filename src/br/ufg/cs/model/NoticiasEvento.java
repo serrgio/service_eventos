@@ -103,10 +103,7 @@ public class NoticiasEvento {
         if (!Objects.equals(this.dtCadastro, other.dtCadastro)) {
             return false;
         }
-        if (!Objects.equals(this.foto, other.foto)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.foto, other.foto);
     }
 
     @Override

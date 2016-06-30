@@ -73,10 +73,7 @@ public class InscritosEvento {
         if (!Objects.equals(this.idUsuario, other.idUsuario)) {
             return false;
         }
-        if (!Objects.equals(this.dtCadastro, other.dtCadastro)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.dtCadastro, other.dtCadastro);
     }
 
     @Override

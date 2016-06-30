@@ -103,10 +103,7 @@ public class Fotos {
         if (!Objects.equals(this.idEvento, other.idEvento)) {
             return false;
         }
-        if (!Objects.equals(this.dtFoto, other.dtFoto)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.dtFoto, other.dtFoto);
     }
 
     @Override

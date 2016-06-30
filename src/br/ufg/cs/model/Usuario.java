@@ -117,10 +117,7 @@ public class Usuario {
         if (!Objects.equals(this.dtNascimento, other.dtNascimento)) {
             return false;
         }
-        if (!Objects.equals(this.endereco, other.endereco)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.endereco, other.endereco);
     }
 
     @Override

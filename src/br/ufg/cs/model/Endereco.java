@@ -129,10 +129,7 @@ public class Endereco {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.ibge, other.ibge)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.ibge, other.ibge);
     }
 
     @Override

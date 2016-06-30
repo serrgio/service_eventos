@@ -130,10 +130,7 @@ public class Evento {
         if (!Objects.equals(this.dtEvento, other.dtEvento)) {
             return false;
         }
-        if (!Objects.equals(this.foto, other.foto)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.foto, other.foto);
     }
 
     @Override
