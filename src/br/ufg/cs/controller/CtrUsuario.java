@@ -1,22 +1,52 @@
 package br.ufg.cs.controller;
 
 import br.ufg.cs.model.Usuario;
-import static br.ufg.cs.util.Conexao.Conectar;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import static br.ufg.cs.controller.CtrThread.GetThread;
-
+import br.ufg.cs.util.Conexao;
 
 /**
+ * Classe responsável por conter os as funções referentes ao Usuario
  *
- * Created by José Sergio on 16/06/2016.
+ * @author José Sérgio de Souza
+ * @date 30/06/2016 08:51:43
+ * @version 1.0
  */
-public class CtrUsuario {
+public class CtrUsuario extends Conexao {
 
+    private static CtrUsuario instance;
+
+    /**
+     *
+     * Método responsável por criar uma instancia da classe
+     *
+     * @return
+     * @author José Sérgio de Souza
+     * @date 30/06/2016 08:51:43
+     * @version 1.0
+     */
+    public static CtrUsuario getInstance() {
+        if (instance == null) {
+            instance = new CtrUsuario();
+        }
+        return instance;
+    }
+
+    /**
+     *
+     * Método responsável por inserir um usuário no banco de dados
+     *
+     * @param objUsuario
+     * @return
+     * @author José Sérgio de Souza
+     * @throws java.sql.SQLException
+     * @date 15/06/2016 14:47:43
+     * @version 1.0
+     */
     public boolean InsertUsuario(Usuario objUsuario) throws SQLException {
         boolean bRetorno = false;
         try (Connection conn = Conectar()) {
@@ -35,8 +65,19 @@ public class CtrUsuario {
         return bRetorno;
     }
 
-    public Usuario GetUsuario(String token) throws SQLException {        
-        Usuario objUsuario = GetThread(token);
+    /**
+     *
+     * Método responsável por buscar um usuário no banco de dados
+     *
+     * @param token
+     * @return
+     * @author José Sérgio de Souza
+     * @throws java.sql.SQLException
+     * @date 15/06/2016 14:47:43
+     * @version 1.0
+     */
+    public Usuario GetUsuario(String token) throws SQLException {
+        Usuario objUsuario = CtrThread.getInstance().GetThread(token);
         try (Connection conn = Conectar()) {
             String sql = "SELECT nome, email, dtNascimento, perfil FROM Usuario WHERE id=" + objUsuario.getId();
 
@@ -53,6 +94,18 @@ public class CtrUsuario {
         return objUsuario;
     }
 
+    /**
+     *
+     * Método responsável por alterar um usuário no banco de dados
+     *
+     * @param token
+     * @param objUsuario
+     * @return
+     * @author José Sérgio de Souza
+     * @throws java.sql.SQLException
+     * @date 15/06/2016 14:47:43
+     * @version 1.0
+     */
     public boolean UpdateUsuario(String token, Usuario objUsuario) throws SQLException {
         boolean bRetorno = false;
 
@@ -74,9 +127,20 @@ public class CtrUsuario {
         return bRetorno;
     }
 
+    /**
+     *
+     * Método responsável por excluir um usuário no banco de dados
+     *
+     * @param token
+     * @return
+     * @author José Sérgio de Souza
+     * @throws java.sql.SQLException
+     * @date 15/06/2016 14:47:43
+     * @version 1.0
+     */
     public boolean DeleteUsuario(String token) throws SQLException {
         boolean bRetorno = false;
-        Usuario objUsuario = GetThread(token);
+        Usuario objUsuario = CtrThread.getInstance().GetThread(token);
         try (Connection conn = Conectar()) {
             String sql = "DELETE FROM Usuario WHERE id=?";
             PreparedStatement statement = conn.prepareStatement(sql);

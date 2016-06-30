@@ -5,7 +5,11 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Created by José Sergio on 09/06/2016.
+ * Classe responsável por conter o Objeto Usuario
+ *
+ * @author José Sérgio de Souza
+ * @date 30/06/2016 08:51:43
+ * @version 1.0
  */
 @XmlRootElement
 public class Usuario {

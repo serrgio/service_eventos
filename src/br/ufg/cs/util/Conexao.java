@@ -9,7 +9,16 @@ import java.sql.SQLException;
  */
 public class Conexao {
 
-    public static Connection Conectar() {
+    private static Conexao instance;
+
+    public static Conexao getInstance() {
+        if (instance == null) {
+            instance = new Conexao();
+        }
+        return instance;
+    }
+
+    public Connection Conectar() {
         String dbURL = "jdbc:mysql://localhost:3306/evento";
         String username = "evento";
         String password = "123";

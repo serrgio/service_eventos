@@ -13,11 +13,26 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- * Created by José Sergio on 16/06/2016.
+ * Classe responsável por conter os Resources dos Usuario
+ *
+ * @author José Sérgio de Souza
+ * @date 30/06/2016 08:51:43
+ * @version 1.0
  */
 @Path("/usuario")
 public class ResUsuario {
 
+    /**
+     *
+     * Resources que insere um usuario no banco de dados
+     *
+     * @param jsonUsuario
+     * @return
+     * @author José Sérgio de Souza
+     * @throws java.sql.SQLException
+     * @date 30/06/2016 08:51:43
+     * @version 1.0
+     */
     @POST
     @Path("/insert")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
@@ -27,14 +42,37 @@ public class ResUsuario {
         Usuario objUsuario = gson.fromJson(jsonUsuario, Usuario.class);
         return new CtrUsuario().InsertUsuario(objUsuario);
     }
-    
+
+    /**
+     *
+     * Resources que busca um usuario no banco de dados
+     *
+     * @param token
+     * @return
+     * @author José Sérgio de Souza
+     * @throws java.sql.SQLException
+     * @date 30/06/2016 08:51:43
+     * @version 1.0
+     */
     @GET
     @Path("/get")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
-    public Usuario cadUsuario(@PathParam("id") String token) throws SQLException {        
+    public Usuario cadUsuario(@PathParam("id") String token) throws SQLException {
         return new CtrUsuario().GetUsuario(token);
     }
-    
+
+    /**
+     *
+     * Resources que altera um usuario no banco de dados
+     *
+     * @param token
+     * @param jsonUsuario
+     * @return
+     * @author José Sérgio de Souza
+     * @throws java.sql.SQLException
+     * @date 30/06/2016 08:51:43
+     * @version 1.0
+     */
     @POST
     @Path("/update")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
@@ -44,11 +82,22 @@ public class ResUsuario {
         Usuario objUsuario = gson.fromJson(jsonUsuario, Usuario.class);
         return new CtrUsuario().UpdateUsuario(token, objUsuario);
     }
-    
+
+    /**
+     *
+     * Resources que exclui um usuario no banco de dados
+     *
+     * @param token
+     * @return
+     * @author José Sérgio de Souza
+     * @throws java.sql.SQLException
+     * @date 30/06/2016 08:51:43
+     * @version 1.0
+     */
     @GET
     @Path("/delete")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
-    public boolean DeleteUsuario(@PathParam("id") String token) throws SQLException {        
+    public boolean DeleteUsuario(@PathParam("id") String token) throws SQLException {
         return new CtrUsuario().DeleteUsuario(token);
     }
 
