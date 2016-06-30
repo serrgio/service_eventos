@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
  * Created by José Sergio on 16/06/2016.
  */
 @Path("/usuario")
-public class resUsuario {
+public class ResUsuario {
 
     @POST
     @Path("/insert")
