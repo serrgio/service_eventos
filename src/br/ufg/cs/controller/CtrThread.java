@@ -2,7 +2,13 @@ package br.ufg.cs.controller;
 
 import br.ufg.cs.model.Usuario;
 import br.ufg.cs.util.Conexao;
+import br.ufg.cs.util.Miscelanea;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Classe responsável por conter os as funções referentes a Thread
@@ -43,7 +49,19 @@ public class CtrThread extends Conexao {
      * @version 1.0
      */
     public String InsertThread(Usuario objUsuario) throws SQLException {
-        return null;
+        String sToken = Miscelanea.getInstance().MD5(objUsuario.getEmail());
+        try (Connection conn = Conectar()) {
+            String sql = "INSERT INTO thread (idusuario, dtcriacao, dtalteracao, perfil, stoken) VALUES (?, NOW(), NOW(), ?, ?)";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setLong(1, objUsuario.getId());
+            statement.setInt(4, objUsuario.getPerfil());
+            statement.setString(5, sToken);
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted == 0) {
+                sToken = "";
+            }
+        }
+        return sToken;
     }
 
     /**
@@ -58,7 +76,25 @@ public class CtrThread extends Conexao {
      * @version 1.0
      */
     public Usuario GetThread(String token) throws SQLException {
-        return null;
+        Usuario objUsuario = CtrThread.getInstance().GetThread(token);
+        try (Connection conn = Conectar()) {
+            String sql = "SELECT idusuario, dtnascimento, email, idendereco, nome, perfil "
+                    + "FROM thread a "
+                    + "LEFT JOIN usuario b ON d.id = a.idusuario "
+                    + "WHERE stoken=" + objUsuario.getId();
+
+            Statement statement = conn.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            if (result.next()) {
+                objUsuario.setId(result.getLong(1));
+                objUsuario.setDtNascimento(result.getDate(2));
+                objUsuario.setEmail(result.getString(3));
+                objUsuario.setNome(result.getString(5));
+                objUsuario.setPerfil(result.getInt(6));
+            }
+        }
+        return objUsuario;
     }
 
     /**
