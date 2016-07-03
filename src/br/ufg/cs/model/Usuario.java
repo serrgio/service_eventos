@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Usuario {
 
-    private Long id;
+    private Integer id;
     private String nome;
     private String senha;
     private String email;
@@ -22,11 +22,11 @@ public class Usuario {
     private Endereco endereco;
     private int perfil;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

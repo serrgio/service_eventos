@@ -51,12 +51,12 @@ public class CtrUsuario extends Conexao {
         boolean bRetorno = false;
         try (Connection conn = Conectar()) {
             String sql = "INSERT INTO Usuario (nome, senha, email, dtNascimento, perfil) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement statement = conn.prepareStatement(sql);
+            PreparedStatement statement = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, objUsuario.getNome());
             statement.setString(2, objUsuario.getSenha());
-            statement.setString(1, objUsuario.getEmail());
-            statement.setDate(0, (Date) objUsuario.getDtNascimento());
-            statement.setInt(2, objUsuario.getPerfil());
+            statement.setString(3, objUsuario.getEmail());
+            statement.setDate(4, (Date) objUsuario.getDtNascimento());
+            statement.setInt(5, objUsuario.getPerfil());
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
                 bRetorno = true;
@@ -79,7 +79,7 @@ public class CtrUsuario extends Conexao {
     public Usuario GetUsuario(String token) throws SQLException {
         Usuario objUsuario = CtrThread.getInstance().GetThread(token);
         try (Connection conn = Conectar()) {
-            String sql = "SELECT nome, email, dtNascimento, perfil FROM Usuario WHERE id=" + objUsuario.getId();
+            String sql = "SELECT nome, email, dtNascimento, perfil FROM Usuario WHERE id=" + objUsuario.getEmail();
 
             Statement statement = conn.createStatement();
             ResultSet result = statement.executeQuery(sql);

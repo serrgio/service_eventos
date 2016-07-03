@@ -14,26 +14,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Thread {
 
-    private Long id;
-    private Long idUsuario;
+    private Integer id;
+    private Integer idUsuario;
     private Date dtCriacao;
     private Date dtAlteracao;
     private String sToken;
     private int perfil;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getIdUsuario() {
+    public Integer getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
 

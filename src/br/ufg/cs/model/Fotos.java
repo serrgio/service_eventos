@@ -13,26 +13,26 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class Fotos {
-    private Long id;
-    private Long idEvento;
+    private Integer id;
+    private Integer idEvento;
     private String nome;
     private String descricao;
     private Date dtFoto;
     private String foto;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getIdEvento() {
+    public Integer getIdEvento() {
         return idEvento;
     }
 
-    public void setIdEvento(Long idEvento) {
+    public void setIdEvento(Integer idEvento) {
         this.idEvento = idEvento;
     }
 

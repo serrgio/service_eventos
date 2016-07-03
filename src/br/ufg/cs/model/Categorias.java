@@ -13,16 +13,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class Categorias {
-    private Long id;
+    private Integer id;
     private String nome;
     private String descricao;
     private Date dtCadastro;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

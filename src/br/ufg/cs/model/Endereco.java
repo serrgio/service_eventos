@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Endereco {
 
-    private Long id;
+    private Integer id;
     private String cep;
     private String logradouro;
     private String complemento;
@@ -22,11 +22,11 @@ public class Endereco {
     private String uf;
     private Integer ibge;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

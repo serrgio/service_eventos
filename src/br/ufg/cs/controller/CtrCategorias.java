@@ -53,14 +53,13 @@ public class CtrCategorias extends Conexao {
      * Método responsável por buscar uma lista de categorias de eventos no banco de dados
      *
      * @param token
-     * @param idCategorias
      * @return
      * @author José Sérgio de Souza
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
-    public ArrayList<Categorias> GetCategorias(String token, int idCategorias) throws SQLException {
+    public ArrayList<Categorias> GetCategorias(String token) throws SQLException {
         return null;
     }
 
