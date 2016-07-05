@@ -13,12 +13,20 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class NoticiasEvento {
+    private Integer id;
     private Integer idEvento;
     private Integer idUsuario;
     private Date dtCadastro;
     private String sTitulo;
     private String sDescricao;
-    private Fotos foto;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getIdEvento() {
         return idEvento;
@@ -60,23 +68,15 @@ public class NoticiasEvento {
         this.sDescricao = sDescricao;
     }
 
-    public Fotos getFoto() {
-        return foto;
-    }
-
-    public void setFoto(Fotos foto) {
-        this.foto = foto;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 29 * hash + Objects.hashCode(this.idEvento);
-        hash = 29 * hash + Objects.hashCode(this.idUsuario);
-        hash = 29 * hash + Objects.hashCode(this.dtCadastro);
-        hash = 29 * hash + Objects.hashCode(this.sTitulo);
-        hash = 29 * hash + Objects.hashCode(this.sDescricao);
-        hash = 29 * hash + Objects.hashCode(this.foto);
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        hash = 23 * hash + Objects.hashCode(this.idEvento);
+        hash = 23 * hash + Objects.hashCode(this.idUsuario);
+        hash = 23 * hash + Objects.hashCode(this.dtCadastro);
+        hash = 23 * hash + Objects.hashCode(this.sTitulo);
+        hash = 23 * hash + Objects.hashCode(this.sDescricao);
         return hash;
     }
 
@@ -98,6 +98,9 @@ public class NoticiasEvento {
         if (!Objects.equals(this.sDescricao, other.sDescricao)) {
             return false;
         }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
         if (!Objects.equals(this.idEvento, other.idEvento)) {
             return false;
         }
@@ -107,11 +110,12 @@ public class NoticiasEvento {
         if (!Objects.equals(this.dtCadastro, other.dtCadastro)) {
             return false;
         }
-        return Objects.equals(this.foto, other.foto);
+        return true;
     }
 
     @Override
     public String toString() {
-        return "NoticiasEvento{" + "idEvento=" + idEvento + ", idUsuario=" + idUsuario + ", dtCadastro=" + dtCadastro + ", sTitulo=" + sTitulo + ", sDescricao=" + sDescricao + ", foto=" + foto + '}';
-    }    
+        return "NoticiasEvento{" + "id=" + id + ", idEvento=" + idEvento + ", idUsuario=" + idUsuario + ", dtCadastro=" + dtCadastro + ", sTitulo=" + sTitulo + ", sDescricao=" + sDescricao + '}';
+    }
+   
 }

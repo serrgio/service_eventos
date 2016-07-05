@@ -1,5 +1,6 @@
 package br.ufg.cs.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -21,7 +22,7 @@ public class Evento {
     private String descricao;
     private Endereco endereco;
     private Date dtEvento;
-    private Fotos foto;
+    private ArrayList<Fotos> foto;
 
     public Integer getId() {
         return id;
@@ -79,11 +80,11 @@ public class Evento {
         this.dtEvento = dtEvento;
     }
 
-    public Fotos getFoto() {
+    public ArrayList<Fotos> getFoto() {
         return foto;
     }
 
-    public void setFoto(Fotos foto) {
+    public void setFoto(ArrayList<Fotos> foto) {
         this.foto = foto;
     }
 

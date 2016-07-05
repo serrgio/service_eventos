@@ -2,7 +2,11 @@ package br.ufg.cs.controller;
 
 import br.ufg.cs.model.Fotos;
 import br.ufg.cs.util.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -36,7 +40,6 @@ public class CtrFotos extends Conexao {
      *
      * Método responsável por inserir uma foto no banco de dados
      *
-     * @param token
      * @param objFotos
      * @return
      * @author José Sérgio de Souza
@@ -44,15 +47,26 @@ public class CtrFotos extends Conexao {
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
-    public boolean InsertFotos(String token, Fotos objFotos) throws SQLException {
-        return true;
+    public boolean InsertFotos(Fotos objFotos) throws SQLException {
+        boolean bRetorno = false;
+        try (Connection conn = Conectar()) {
+            String sql = "INSERT INTO fotos(idEvento, nome, descricao, dtFoto) VALUES (?,?,?,NOW())";
+            PreparedStatement statement = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, objFotos.getIdEvento());
+            statement.setString(2, objFotos.getNome());
+            statement.setString(3, objFotos.getDescricao());
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted > 0) {
+                bRetorno = true;
+            }
+        }
+        return bRetorno;
     }
 
     /**
      *
      * Método responsável por inserir uma foto no banco de dados
      *
-     * @param token
      * @param idEvento
      * @return
      * @author José Sérgio de Souza
@@ -60,15 +74,31 @@ public class CtrFotos extends Conexao {
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
-    public ArrayList<Fotos> GetFotos(String token, int idEvento) throws SQLException {
-        return null;
+    public ArrayList<Fotos> GetFotos(Integer idEvento) throws SQLException {
+        ArrayList<Fotos> lstFotos = new ArrayList<>();
+        try (Connection conn = Conectar()) {
+            String sql = "SELECT id, idEvento, nome, descricao, dtFoto FROM fotos WHERE iDevento="+idEvento;
+
+            Statement statement = conn.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next()) {
+                Fotos objFotos = new Fotos();
+                objFotos.setId(result.getInt(1));
+                objFotos.setIdEvento(result.getInt(2));
+                objFotos.setNome(result.getString(3));
+                objFotos.setDescricao(result.getString(4));
+                objFotos.setDtFoto(result.getDate(5));
+                lstFotos.add(objFotos);
+            }
+        }
+        return lstFotos;
     }
 
     /**
      *
      * Método responsável por excluir uma foto no banco de dados
      *
-     * @param token
      * @param idFotos
      * @return
      * @author José Sérgio de Souza
@@ -76,7 +106,18 @@ public class CtrFotos extends Conexao {
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
-    public boolean DeleteFotos(String token, Integer idFotos) throws SQLException {
-        return true;
+    public boolean DeleteFotos(Integer idFotos) throws SQLException {
+        boolean bRetorno = false;
+        try (Connection conn = Conectar()) {
+            String sql = "DELETE FROM fotos WHERE id=?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setLong(1, idFotos);
+
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                bRetorno = true;
+            }
+        }
+        return bRetorno;
     }
 }

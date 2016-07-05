@@ -100,14 +100,26 @@ public class CtrThread extends Conexao {
      *
      * Método responsável por alterar uma thread no banco de dados
      *
-     * @param objUsuario
+     * @param sToken
      * @return
      * @author José Sérgio de Souza
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
-    public boolean UpdateThread(Usuario objUsuario) throws SQLException {
-        return true;
+    public boolean UpdateThread(String sToken) throws SQLException {
+        boolean bRetorno = false;
+
+        try (Connection conn = Conectar()) {
+            String sql = "UPDATE thread SET dtAlteracao=NOW() WHERE stoken=?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, sToken);
+
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                bRetorno = true;
+            }
+        }
+        return bRetorno;
     }
 }

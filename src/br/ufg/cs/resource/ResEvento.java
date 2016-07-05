@@ -3,9 +3,11 @@ package br.ufg.cs.resource;
 import br.ufg.cs.controller.CtrCategorias;
 import br.ufg.cs.controller.CtrEvento;
 import br.ufg.cs.controller.CtrFotos;
+import br.ufg.cs.controller.CtrThread;
 import br.ufg.cs.model.Categorias;
 import br.ufg.cs.model.Evento;
 import br.ufg.cs.model.Fotos;
+import br.ufg.cs.model.Usuario;
 import com.google.gson.Gson;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -43,10 +45,10 @@ public class ResEvento {
     @Path("/insert")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
     @Consumes(MediaType.APPLICATION_JSON + "; charset=UTF-8")
-    public boolean InsertEvento(@PathParam("id") String token, String jsonEvento) throws SQLException {
+    public Integer InsertEvento(@PathParam("id") String token, String jsonEvento) throws SQLException {
         Gson gson = new Gson();
         Evento objEvento = gson.fromJson(jsonEvento, Evento.class);
-        return new CtrEvento().InsertEvento(token, objEvento);
+        return new CtrEvento().InsertEvento(objEvento);
     }
 
     /**
@@ -65,7 +67,7 @@ public class ResEvento {
     @Path("/get")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
     public Evento GetEvento(@PathParam("id1") String token, @PathParam("id2") int idEvento) throws SQLException {
-        return new CtrEvento().GetEvento(token, idEvento);
+        return new CtrEvento().GetEvento(idEvento);
     }
 
     /**
@@ -84,7 +86,7 @@ public class ResEvento {
     @Path("/getLst")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
     public ArrayList<Evento> GetLstEventos(@PathParam("id1") String token, @PathParam("id2") Integer idCategoria) throws SQLException {
-        return new CtrEvento().GetLstEvento(token, idCategoria);
+        return new CtrEvento().GetLstEvento();
     }
 
     /**
@@ -106,7 +108,7 @@ public class ResEvento {
     public boolean UpdateEvento(@PathParam("id") String token, String jsonEvento) throws SQLException {
         Gson gson = new Gson();
         Evento objEvento = gson.fromJson(jsonEvento, Evento.class);
-        return new CtrEvento().UpdateEvento(token, objEvento);
+        return new CtrEvento().UpdateEvento(objEvento);
     }
 
     /**
@@ -125,7 +127,7 @@ public class ResEvento {
     @Path("/delete")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
     public boolean DeleteEvento(@PathParam("id1") String token, @PathParam("id2") int idEvento) throws SQLException {
-        return new CtrEvento().DeleteEvento(token, idEvento);
+        return new CtrEvento().DeleteEvento(idEvento);
     }
 
     /**
@@ -147,7 +149,7 @@ public class ResEvento {
     public boolean InsertFoto(@PathParam("id") String token, String jsonFoto) throws SQLException {
         Gson gson = new Gson();
         Fotos objFotos = gson.fromJson(jsonFoto, Fotos.class);
-        return new CtrFotos().InsertFotos(token, objFotos);
+        return new CtrFotos().InsertFotos(objFotos);
     }
 
     /**
@@ -166,7 +168,7 @@ public class ResEvento {
     @Path("/deleteFoto")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
     public boolean deleteFoto(@PathParam("id1") String token, @PathParam("id2") Integer idFoto) throws SQLException {
-        return new CtrFotos().DeleteFotos(token, idFoto);
+        return new CtrFotos().DeleteFotos(idFoto);
     }
 
     /**
@@ -188,7 +190,7 @@ public class ResEvento {
     public boolean InsertCategorias(@PathParam("id") String token, String jsonCategorias) throws SQLException {
         Gson gson = new Gson();
         Categorias objCategorias = gson.fromJson(jsonCategorias, Categorias.class);
-        return new CtrCategorias().InsertCategorias(token, objCategorias);
+        return new CtrCategorias().InsertCategorias(objCategorias);
     }
 
     /**
@@ -207,7 +209,7 @@ public class ResEvento {
     @Path("/deleteCategorias")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
     public boolean DeleteCategorias(@PathParam("id1") String token, @PathParam("id2") Integer idCategorias) throws SQLException {
-        return new CtrCategorias().DeleteCategorias(token, idCategorias);
+        return new CtrCategorias().DeleteCategorias(idCategorias);
     }
 
     /**
@@ -229,7 +231,12 @@ public class ResEvento {
     public boolean UpdateCategorias(@PathParam("id") String token, String jsonCategorias) throws SQLException {
         Gson gson = new Gson();
         Categorias objCategorias = gson.fromJson(jsonCategorias, Categorias.class);
-        return new CtrCategorias().UpdateCategorias(token, objCategorias);
+        Usuario objUsuario = CtrThread.getInstance().GetThread(token);
+        if(objUsuario.getId()!=null){
+            return new CtrCategorias().UpdateCategorias(objCategorias);
+        }else{
+            return false;
+        }        
     }
 
     /**
@@ -247,6 +254,6 @@ public class ResEvento {
     @Path("/updateCategorias")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
     public ArrayList<Categorias> UpdateCategorias(@PathParam("id") String token) throws SQLException {
-        return new CtrCategorias().GetCategorias(token);
+        return new CtrCategorias().GetCategorias();
     }
 }
