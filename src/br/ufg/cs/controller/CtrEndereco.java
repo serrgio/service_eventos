@@ -48,7 +48,7 @@ public class CtrEndereco extends Conexao {
      */
     public Integer InsertEndereco(Endereco objEndereco) throws SQLException {
         Integer rowsInserted = 0;
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "INSERT INTO endereco(cep, logradouro, complemento, bairro, localidade, uf, ibge) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement statement = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, objEndereco.getCep());
@@ -76,7 +76,7 @@ public class CtrEndereco extends Conexao {
      */
     public Endereco GetEndereco(int idEndereco) throws SQLException {
         Endereco objEndereco = new Endereco();
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "SELECT cep, logradouro, complemento, bairro, localidade, uf, ibge FROM endereco WHERE id="+idEndereco;
 
             Statement statement = conn.createStatement();
@@ -109,7 +109,7 @@ public class CtrEndereco extends Conexao {
     public boolean UpdateEndereco(Endereco objEndereco) throws SQLException {
         boolean bRetorno = false;
 
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "UPDATE endereco SET cep=?,logradouro=?,complemento=?,bairro=?,localidade=?,uf=?,ibge=? WHERE id=?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, objEndereco.getCep());
@@ -142,7 +142,7 @@ public class CtrEndereco extends Conexao {
      */
     public boolean DeleteEndereco(Integer idEndereco) throws SQLException {
         boolean bRetorno = false;
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "DELETE FROM endereco WHERE id=?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setLong(1, idEndereco);

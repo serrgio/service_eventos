@@ -50,7 +50,7 @@ public class CtrNoticiasEvento extends Conexao {
      */
     public boolean InsertNoticiasEvento(NoticiasEvento objNoticiasEvento) throws SQLException {
         boolean bRetorno = false;
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "INSERT INTO noticiasevento(idEvento, idUsuario, dtCadastro, titulo, descricao) VALUES (?,?,NOW(),?,?)";
             PreparedStatement statement = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, objNoticiasEvento.getIdEvento());
@@ -78,7 +78,7 @@ public class CtrNoticiasEvento extends Conexao {
      */
     public ArrayList<NoticiasEvento> GetNoticiasEvento(int idEvento) throws SQLException {
         ArrayList<NoticiasEvento> lstNoticiasEvento = new ArrayList<>();
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "SELECT id, idEvento, idUsuario, tCadastro, titulo, descricao FROM noticiasevento WHERE idEvento="+idEvento;
 
             Statement statement = conn.createStatement();
@@ -112,7 +112,7 @@ public class CtrNoticiasEvento extends Conexao {
     public boolean UpdateNoticiasEvento(NoticiasEvento objNoticiasEvento) throws SQLException {
        boolean bRetorno = false;
 
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "UPDATE noticiasevento SET titulo=?,descricao=? WHERE id=?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, objNoticiasEvento.getsTitulo());
@@ -140,7 +140,7 @@ public class CtrNoticiasEvento extends Conexao {
      */
     public boolean DeleteNoticiasEvento(Integer idNoticiasEvento) throws SQLException {
         boolean bRetorno = false;
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "DELETE FROM noticiasevento WHERE id=?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setLong(1, idNoticiasEvento);

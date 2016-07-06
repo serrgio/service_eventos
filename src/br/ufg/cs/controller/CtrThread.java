@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 
 /**
  * Classe responsável por conter os as funções referentes a Thread
@@ -48,8 +49,9 @@ public class CtrThread extends Conexao {
      * @version 1.0
      */
     public String InsertThread(Usuario objUsuario) throws SQLException {
-        String sToken = Miscelanea.getInstance().MD5(objUsuario.getEmail());
-        try (Connection conn = Conectar()) {
+        Date dtAtual = new Date();
+        String sToken = Miscelanea.getInstance().MD5(objUsuario.getEmail()+dtAtual);
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "INSERT INTO thread (idusuario, dtcriacao, dtalteracao, perfil, stoken) VALUES (?, NOW(), NOW(), ?, ?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, objUsuario.getId());
@@ -76,7 +78,7 @@ public class CtrThread extends Conexao {
      */
     public Usuario GetThread(String token) throws SQLException {
         Usuario objUsuario = CtrThread.getInstance().GetThread(token);
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "SELECT idusuario, dtnascimento, email, idendereco, nome, perfil "
                     + "FROM thread a "
                     + "LEFT JOIN usuario b ON d.id = a.idusuario "
@@ -110,7 +112,7 @@ public class CtrThread extends Conexao {
     public boolean UpdateThread(String sToken) throws SQLException {
         boolean bRetorno = false;
 
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "UPDATE thread SET dtAlteracao=NOW() WHERE stoken=?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, sToken);

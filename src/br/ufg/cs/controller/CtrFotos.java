@@ -49,7 +49,7 @@ public class CtrFotos extends Conexao {
      */
     public boolean InsertFotos(Fotos objFotos) throws SQLException {
         boolean bRetorno = false;
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "INSERT INTO fotos(idEvento, nome, descricao, dtFoto) VALUES (?,?,?,NOW())";
             PreparedStatement statement = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, objFotos.getIdEvento());
@@ -76,7 +76,7 @@ public class CtrFotos extends Conexao {
      */
     public ArrayList<Fotos> GetFotos(Integer idEvento) throws SQLException {
         ArrayList<Fotos> lstFotos = new ArrayList<>();
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "SELECT id, idEvento, nome, descricao, dtFoto FROM fotos WHERE iDevento="+idEvento;
 
             Statement statement = conn.createStatement();
@@ -108,7 +108,7 @@ public class CtrFotos extends Conexao {
      */
     public boolean DeleteFotos(Integer idFotos) throws SQLException {
         boolean bRetorno = false;
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "DELETE FROM fotos WHERE id=?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setLong(1, idFotos);

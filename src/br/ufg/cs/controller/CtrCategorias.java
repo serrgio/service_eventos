@@ -49,7 +49,7 @@ public class CtrCategorias extends Conexao {
      */
     public boolean InsertCategorias(Categorias objCategorias) throws SQLException {
         boolean bRetorno = false;
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "INSERT INTO categorias (nome, descricao, dtCadastro) VALUES (?,?,NOW())";
             PreparedStatement statement = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, objCategorias.getNome());
@@ -74,7 +74,7 @@ public class CtrCategorias extends Conexao {
      */
     public ArrayList<Categorias> GetCategorias() throws SQLException {
         ArrayList<Categorias> lstUsuario = new ArrayList<>();
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "SELECT id,nome,descricao,dtcadastro FROM categorias";
 
             Statement statement = conn.createStatement();
@@ -106,7 +106,7 @@ public class CtrCategorias extends Conexao {
     public boolean UpdateCategorias(Categorias objCategorias) throws SQLException {
         boolean bRetorno = false;
 
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "UPDATE categorias SET nome=?, descricao=? WHERE id=?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, objCategorias.getNome());
@@ -134,7 +134,7 @@ public class CtrCategorias extends Conexao {
      */
     public boolean DeleteCategorias(Integer idCategorias) throws SQLException {
         boolean bRetorno = false;
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "DELETE FROM Usuario WHERE id=?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setLong(1, idCategorias);

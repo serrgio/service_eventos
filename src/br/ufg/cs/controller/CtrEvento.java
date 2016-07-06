@@ -53,7 +53,7 @@ public class CtrEvento extends Conexao {
     public Integer InsertEvento(Evento objEvento) throws SQLException {
         Integer rowsInserted = 0;
         Integer iEndereco = CtrEndereco.getInstance().InsertEndereco(objEvento.getEndereco());
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "INSERT INTO evento(idCategoria, idUsuario, nome, descricao, idEndereco, dtEvento) VALUES (?,?,?,?,?,?)";
             PreparedStatement statement = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, objEvento.getIdCategoria());
@@ -80,7 +80,7 @@ public class CtrEvento extends Conexao {
      */
     public Evento GetEvento(int idEvento) throws SQLException {
         Evento objEvento = new Evento();
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "SELECT id, idCategoria, idUsuario, nome, descricao, idEndereco, dtEvento FROM evento WHERE id="+idEvento;
 
             Statement statement = conn.createStatement();
@@ -112,7 +112,7 @@ public class CtrEvento extends Conexao {
      */
     public ArrayList<Evento> GetLstEvento() throws SQLException {
         ArrayList<Evento> lstEvento = new ArrayList<>();
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "SELECT id, idCategoria, idUsuario, nome, descricao, idEndereco, dtEvento FROM evento";
 
             Statement statement = conn.createStatement();
@@ -148,7 +148,7 @@ public class CtrEvento extends Conexao {
     public boolean UpdateEvento(Evento objEvento) throws SQLException {
         boolean bRetorno = false;
 
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "UPDATE evento SET nome=?,descricao=?,dtEvento=? WHERE id=?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, objEvento.getNome());
@@ -168,7 +168,6 @@ public class CtrEvento extends Conexao {
      *
      * Método responsável por deletar um evento no banco de dados
      *
-     * @param token
      * @param idEvento
      * @return
      * @author José Sérgio de Souza
@@ -178,7 +177,7 @@ public class CtrEvento extends Conexao {
      */
     public boolean DeleteEvento(Integer idEvento) throws SQLException {
         boolean bRetorno = false;
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "DELETE FROM evento WHERE id=?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setLong(1, idEvento);

@@ -48,7 +48,7 @@ public class Login extends Conexao {
      */
     public String Logar(String email, String senha) throws SQLException {
         String sToken = "";
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "SELECT id, email, senha"
                     + "FROM usuario a "
                     + "WHERE email=" + email

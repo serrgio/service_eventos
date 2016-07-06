@@ -56,7 +56,7 @@ public class CtrUsuario extends Conexao {
                 statement.setString(1, objUsuario.getNome());
                 statement.setString(2, objUsuario.getSenha());
                 statement.setString(3, objUsuario.getEmail());
-                statement.setDate(4, (Date) objUsuario.getDtNascimento());
+                statement.setDate(4, (Date) Miscelanea.getInstance().ConverterData(objUsuario.getDtNascimento()));
                 statement.setInt(5, objUsuario.getPerfil());
                 statement.executeUpdate();
                 ResultSet generatedKeys = statement.getGeneratedKeys();
@@ -82,7 +82,7 @@ public class CtrUsuario extends Conexao {
      */
     public Usuario GetUsuario(String token) throws SQLException {
         Usuario objUsuario = CtrThread.getInstance().GetThread(token);
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "SELECT nome, email, dtNascimento, perfil FROM Usuario WHERE id=" + objUsuario.getEmail();
 
             Statement statement = conn.createStatement();
@@ -113,7 +113,7 @@ public class CtrUsuario extends Conexao {
     public boolean UpdateUsuario(String token, Usuario objUsuario) throws SQLException {
         boolean bRetorno = false;
 
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "UPDATE Usuario SET nome=?, senha=?, email=?, dtNascimento=?, perfil=? WHERE id=?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, objUsuario.getNome());
@@ -145,7 +145,7 @@ public class CtrUsuario extends Conexao {
     public boolean DeleteUsuario(String token) throws SQLException {
         boolean bRetorno = false;
         Usuario objUsuario = CtrThread.getInstance().GetThread(token);
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "DELETE FROM Usuario WHERE id=?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setLong(1, objUsuario.getId());
