@@ -238,22 +238,4 @@ public class ResEvento {
             return false;
         }        
     }
-
-    /**
-     *
-     * Resources que busca uma lista de categorias no banco de dados
-     *
-     * @param token
-     * @return
-     * @author José Sérgio de Souza
-     * @throws java.sql.SQLException
-     * @date 30/06/2016 08:51:43
-     * @version 1.0
-     */
-    @GET
-    @Path("/updateCategorias")
-    @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
-    public ArrayList<Categorias> UpdateCategorias(@PathParam("id") String token) throws SQLException {
-        return new CtrCategorias().GetCategorias();
-    }
 }

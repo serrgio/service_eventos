@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import br.ufg.cs.util.Conexao;
+import br.ufg.cs.util.Miscelanea;
 
 /**
  * Classe responsável por conter os as funções referentes ao Usuario
@@ -49,16 +50,19 @@ public class CtrUsuario extends Conexao {
      */
     public boolean InsertUsuario(Usuario objUsuario) throws SQLException {
         boolean bRetorno = false;
-        try (Connection conn = Conectar()) {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "INSERT INTO Usuario (nome, senha, email, dtNascimento, perfil) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement statement = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, objUsuario.getNome());
-            statement.setString(2, objUsuario.getSenha());
-            statement.setString(3, objUsuario.getEmail());
-            statement.setDate(4, (Date) objUsuario.getDtNascimento());
-            statement.setInt(5, objUsuario.getPerfil());
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
+            try (PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                statement.setString(1, objUsuario.getNome());
+                statement.setString(2, objUsuario.getSenha());
+                statement.setString(3, objUsuario.getEmail());
+                statement.setDate(4, (Date) objUsuario.getDtNascimento());
+                statement.setInt(5, objUsuario.getPerfil());
+                statement.executeUpdate();
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    System.out.println(generatedKeys.getInt(1));
+                }
                 bRetorno = true;
             }
         }

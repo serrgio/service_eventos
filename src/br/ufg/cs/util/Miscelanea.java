@@ -3,6 +3,7 @@ package br.ufg.cs.util;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 /**
  * Classe responsável por conter os as funções referentes a Miscelanea
@@ -45,5 +46,10 @@ public class Miscelanea {
             sHash = "0" + sHash;
         }
         return sHash;
+    }
+
+    public Date ConverterData(Date data) {
+        java.sql.Date sqlDate = new java.sql.Date(data.getTime());
+        return sqlDate;
     }
 }

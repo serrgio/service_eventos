@@ -101,24 +101,4 @@ public class ResUsuario {
     public boolean DeleteUsuario(@PathParam("id") String token) throws SQLException {
         return new CtrUsuario().DeleteUsuario(token);
     }
-    
-    /**
-     *
-     * Resources que loga um usuario
-     *
-     * @param email
-     * @param senha
-     * @return
-     * @author José Sérgio de Souza
-     * @throws java.sql.SQLException
-     * @date 30/06/2016 08:51:43
-     * @version 1.0
-     */
-    @GET
-    @Path("/get")
-    @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
-    public String cadUsuario(@PathParam("id1") String email, @PathParam("id2") String senha) throws SQLException {
-        return new Login().Logar(email, senha);
-    }
-
 }
