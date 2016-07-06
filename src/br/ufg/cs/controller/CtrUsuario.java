@@ -13,7 +13,9 @@ import br.ufg.cs.util.Miscelanea;
 /**
  * Classe responsável por conter os as funções referentes ao Usuario
  *
- * @author José Sérgio de Souza
+ * @author Bianca Raissa
+ * @author José Sérgio
+ * @author Rafhael Augusto
  * @date 30/06/2016 08:51:43
  * @version 1.0
  */
@@ -26,7 +28,9 @@ public class CtrUsuario extends Conexao {
      * Método responsável por criar uma instancia da classe
      *
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
@@ -43,7 +47,9 @@ public class CtrUsuario extends Conexao {
      *
      * @param objUsuario
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 15/06/2016 14:47:43
      * @version 1.0
@@ -75,7 +81,9 @@ public class CtrUsuario extends Conexao {
      *
      * @param token
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 15/06/2016 14:47:43
      * @version 1.0
@@ -105,7 +113,9 @@ public class CtrUsuario extends Conexao {
      * @param token
      * @param objUsuario
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 15/06/2016 14:47:43
      * @version 1.0
@@ -137,7 +147,9 @@ public class CtrUsuario extends Conexao {
      *
      * @param token
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 15/06/2016 14:47:43
      * @version 1.0

@@ -7,12 +7,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Classe responsável por conter o Objeto InscritosEvento
  *
- * @author José Sérgio de Souza
+ * @author Bianca Raissa
+ * @author José Sérgio
+ * @author Rafhael Augusto
  * @date 30/06/2016 08:51:43
  * @version 1.0
  */
 @XmlRootElement
 public class InscritosEvento {
+
     private Integer id;
     private Long idEvento;
     private Long idUsuario;
@@ -83,5 +86,5 @@ public class InscritosEvento {
     @Override
     public String toString() {
         return "InscritosEvento{" + "id=" + id + ", idEvento=" + idEvento + ", idUsuario=" + idUsuario + ", dtCadastro=" + dtCadastro + '}';
-    }    
+    }
 }

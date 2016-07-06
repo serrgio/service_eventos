@@ -1,6 +1,5 @@
 package br.ufg.cs.controller;
 
-import br.ufg.cs.model.Categorias;
 import br.ufg.cs.model.NoticiasEvento;
 import br.ufg.cs.util.Conexao;
 import java.sql.Connection;
@@ -13,7 +12,9 @@ import java.util.ArrayList;
 /**
  * Classe responsável por conter os as funções referentes a Noticias dos Eventos
  *
- * @author José Sérgio de Souza
+ * @author Bianca Raissa
+ * @author José Sérgio
+ * @author Rafhael Augusto
  * @date 30/06/2016 08:51:43
  * @version 1.0
  */
@@ -26,7 +27,9 @@ public class CtrNoticiasEvento extends Conexao {
      * Método responsável por criar uma instancia da classe
      *
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
@@ -43,7 +46,9 @@ public class CtrNoticiasEvento extends Conexao {
      *
      * @param objNoticiasEvento
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -52,7 +57,7 @@ public class CtrNoticiasEvento extends Conexao {
         boolean bRetorno = false;
         try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "INSERT INTO noticiasevento(idEvento, idUsuario, dtCadastro, titulo, descricao) VALUES (?,?,NOW(),?,?)";
-            PreparedStatement statement = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, objNoticiasEvento.getIdEvento());
             statement.setInt(2, objNoticiasEvento.getIdUsuario());
             statement.setString(3, objNoticiasEvento.getsTitulo());
@@ -71,7 +76,9 @@ public class CtrNoticiasEvento extends Conexao {
      *
      * @param idEvento
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -79,13 +86,13 @@ public class CtrNoticiasEvento extends Conexao {
     public ArrayList<NoticiasEvento> GetNoticiasEvento(int idEvento) throws SQLException {
         ArrayList<NoticiasEvento> lstNoticiasEvento = new ArrayList<>();
         try (Connection conn = Conexao.getInstance().Conectar()) {
-            String sql = "SELECT id, idEvento, idUsuario, tCadastro, titulo, descricao FROM noticiasevento WHERE idEvento="+idEvento;
+            String sql = "SELECT id, idEvento, idUsuario, tCadastro, titulo, descricao FROM noticiasevento WHERE idEvento=" + idEvento;
 
             Statement statement = conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
 
             while (result.next()) {
-                NoticiasEvento objNoticiasEvento = new NoticiasEvento();                
+                NoticiasEvento objNoticiasEvento = new NoticiasEvento();
                 objNoticiasEvento.setIdEvento(result.getInt(1));
                 objNoticiasEvento.setIdEvento(result.getInt(2));
                 objNoticiasEvento.setIdUsuario(result.getInt(3));
@@ -104,13 +111,15 @@ public class CtrNoticiasEvento extends Conexao {
      *
      * @param objNoticiasEvento
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
     public boolean UpdateNoticiasEvento(NoticiasEvento objNoticiasEvento) throws SQLException {
-       boolean bRetorno = false;
+        boolean bRetorno = false;
 
         try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "UPDATE noticiasevento SET titulo=?,descricao=? WHERE id=?";
@@ -133,7 +142,9 @@ public class CtrNoticiasEvento extends Conexao {
      *
      * @param idNoticiasEvento
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0

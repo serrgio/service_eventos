@@ -13,7 +13,9 @@ import java.util.ArrayList;
 /**
  * Classe responsável por conter os as funções referentes ao Evento
  *
- * @author José Sérgio de Souza
+ * @author Bianca Raissa
+ * @author José Sérgio
+ * @author Rafhael Augusto
  * @date 30/06/2016 08:51:43
  * @version 1.0
  */
@@ -26,7 +28,9 @@ public class CtrEvento extends Conexao {
      * Método responsável por criar uma instancia da classe
      *
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
@@ -43,7 +47,9 @@ public class CtrEvento extends Conexao {
      *
      * @param objEvento
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -53,14 +59,14 @@ public class CtrEvento extends Conexao {
         Integer iEndereco = CtrEndereco.getInstance().InsertEndereco(objEvento.getEndereco());
         try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "INSERT INTO evento(idCategoria, idUsuario, nome, descricao, idEndereco, dtEvento) VALUES (?,?,?,?,?,?)";
-            PreparedStatement statement = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, objEvento.getIdCategoria());
             statement.setInt(2, objEvento.getIdUsuario());
             statement.setString(3, objEvento.getNome());
             statement.setString(4, objEvento.getDescricao());
             statement.setInt(5, iEndereco);
             statement.setDate(6, (Date) objEvento.getDtEvento());
-            rowsInserted = statement.executeUpdate();            
+            rowsInserted = statement.executeUpdate();
         }
         return rowsInserted;
     }
@@ -71,7 +77,9 @@ public class CtrEvento extends Conexao {
      *
      * @param idEvento
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -79,7 +87,7 @@ public class CtrEvento extends Conexao {
     public Evento GetEvento(int idEvento) throws SQLException {
         Evento objEvento = new Evento();
         try (Connection conn = Conexao.getInstance().Conectar()) {
-            String sql = "SELECT id, idCategoria, idUsuario, nome, descricao, idEndereco, dtEvento FROM evento WHERE id="+idEvento;
+            String sql = "SELECT id, idCategoria, idUsuario, nome, descricao, idEndereco, dtEvento FROM evento WHERE id=" + idEvento;
 
             Statement statement = conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
@@ -87,7 +95,7 @@ public class CtrEvento extends Conexao {
             if (result.next()) {
                 objEvento.setId(result.getInt(1));
                 objEvento.setIdCategoria(result.getInt(2));
-                objEvento.setIdUsuario(result.getInt(3));                
+                objEvento.setIdUsuario(result.getInt(3));
                 objEvento.setNome(result.getString(4));
                 objEvento.setDescricao(result.getString(5));
                 objEvento.setEndereco(CtrEndereco.getInstance().GetEndereco(result.getInt(6)));
@@ -97,13 +105,15 @@ public class CtrEvento extends Conexao {
         }
         return objEvento;
     }
-    
+
     /**
      *
      * Método responsável por buscar uma lista de eventos no banco de dados
      *
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -120,7 +130,7 @@ public class CtrEvento extends Conexao {
                 Evento objEvento = new Evento();
                 objEvento.setId(result.getInt(1));
                 objEvento.setIdCategoria(result.getInt(2));
-                objEvento.setIdUsuario(result.getInt(3));                
+                objEvento.setIdUsuario(result.getInt(3));
                 objEvento.setNome(result.getString(4));
                 objEvento.setDescricao(result.getString(5));
                 objEvento.setEndereco(CtrEndereco.getInstance().GetEndereco(result.getInt(6)));
@@ -138,7 +148,9 @@ public class CtrEvento extends Conexao {
      *
      * @param objEvento
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -168,7 +180,9 @@ public class CtrEvento extends Conexao {
      *
      * @param idEvento
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0

@@ -10,7 +10,9 @@ import java.sql.Statement;
 /**
  * Classe responsável por conter os as funções de login
  *
- * @author José Sérgio de Souza
+ * @author Bianca Raissa
+ * @author José Sérgio
+ * @author Rafhael Augusto
  * @date 30/06/2016 08:51:43
  * @version 1.0
  */
@@ -23,7 +25,9 @@ public class Login extends Conexao {
      * Método responsável por criar uma instancia da classe
      *
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
@@ -41,7 +45,9 @@ public class Login extends Conexao {
      * @param email
      * @param senha
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -61,7 +67,7 @@ public class Login extends Conexao {
                 objUsuario.setEmail(result.getString(3));
                 objUsuario.setPerfil(result.getInt(6));
             }
-            if (objUsuario.getId()!=null) {
+            if (objUsuario.getId() != null) {
                 sToken = CtrThread.getInstance().InsertThread(objUsuario);
             }
         }

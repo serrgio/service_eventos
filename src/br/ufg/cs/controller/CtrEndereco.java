@@ -11,7 +11,9 @@ import java.sql.Statement;
 /**
  * Classe responsável por conter os as funções referentes ao Endereço
  *
- * @author José Sérgio de Souza
+ * @author Bianca Raissa
+ * @author José Sérgio
+ * @author Rafhael Augusto
  * @date 30/06/2016 08:51:43
  * @version 1.0
  */
@@ -24,7 +26,9 @@ public class CtrEndereco extends Conexao {
      * Método responsável por criar uma instancia da classe
      *
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
@@ -41,7 +45,9 @@ public class CtrEndereco extends Conexao {
      *
      * @param objEndereco
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -50,7 +56,7 @@ public class CtrEndereco extends Conexao {
         Integer rowsInserted = 0;
         try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "INSERT INTO endereco(cep, logradouro, complemento, bairro, localidade, uf, ibge) VALUES (?,?,?,?,?,?,?)";
-            PreparedStatement statement = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, objEndereco.getCep());
             statement.setString(2, objEndereco.getLogradouro());
             statement.setString(3, objEndereco.getComplemento());
@@ -69,7 +75,9 @@ public class CtrEndereco extends Conexao {
      *
      * @param idEndereco
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -77,7 +85,7 @@ public class CtrEndereco extends Conexao {
     public Endereco GetEndereco(int idEndereco) throws SQLException {
         Endereco objEndereco = new Endereco();
         try (Connection conn = Conexao.getInstance().Conectar()) {
-            String sql = "SELECT cep, logradouro, complemento, bairro, localidade, uf, ibge FROM endereco WHERE id="+idEndereco;
+            String sql = "SELECT cep, logradouro, complemento, bairro, localidade, uf, ibge FROM endereco WHERE id=" + idEndereco;
 
             Statement statement = conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
@@ -101,7 +109,9 @@ public class CtrEndereco extends Conexao {
      *
      * @param objEndereco
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -135,7 +145,9 @@ public class CtrEndereco extends Conexao {
      *
      * @param idEndereco
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0

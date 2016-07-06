@@ -22,7 +22,9 @@ import javax.ws.rs.core.MediaType;
 /**
  * Classe responsável por conter os Resources dos Eventos
  *
- * @author José Sérgio de Souza
+ * @author Bianca Raissa
+ * @author José Sérgio
+ * @author Rafhael Augusto
  * @date 30/06/2016 08:51:43
  * @version 1.0
  */
@@ -36,7 +38,9 @@ public class ResEvento {
      * @param token
      * @param jsonEvento
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -58,7 +62,9 @@ public class ResEvento {
      * @param token
      * @param idEvento
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -77,7 +83,9 @@ public class ResEvento {
      * @param token
      * @param idCategoria
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -96,7 +104,9 @@ public class ResEvento {
      * @param token
      * @param jsonEvento
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -118,7 +128,9 @@ public class ResEvento {
      * @param token
      * @param idEvento
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -137,7 +149,9 @@ public class ResEvento {
      * @param token
      * @param jsonFoto
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -159,7 +173,9 @@ public class ResEvento {
      * @param token
      * @param idFoto
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -178,7 +194,9 @@ public class ResEvento {
      * @param token
      * @param jsonCategorias
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -200,7 +218,9 @@ public class ResEvento {
      * @param token
      * @param idCategorias
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -219,7 +239,9 @@ public class ResEvento {
      * @param token
      * @param jsonCategorias
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -232,10 +254,10 @@ public class ResEvento {
         Gson gson = new Gson();
         Categorias objCategorias = gson.fromJson(jsonCategorias, Categorias.class);
         Usuario objUsuario = CtrThread.getInstance().GetThread(token);
-        if(objUsuario.getId()!=null){
+        if (objUsuario.getId() != null) {
             return new CtrCategorias().UpdateCategorias(objCategorias);
-        }else{
+        } else {
             return false;
-        }        
+        }
     }
 }

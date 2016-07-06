@@ -13,12 +13,14 @@ import java.util.Date;
 /**
  * Classe responsável por conter os as funções referentes a Thread
  *
- * @author José Sérgio de Souza
+ * @author Bianca Raissa
+ * @author José Sérgio
+ * @author Rafhael Augusto
  * @date 30/06/2016 08:51:43
  * @version 1.0
  */
 public class CtrThread extends Conexao {
-    
+
     private static CtrThread instance;
 
     /**
@@ -26,7 +28,9 @@ public class CtrThread extends Conexao {
      * Método responsável por criar uma instancia da classe
      *
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
@@ -43,14 +47,16 @@ public class CtrThread extends Conexao {
      *
      * @param objUsuario
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
     public String InsertThread(Usuario objUsuario) throws SQLException {
         Date dtAtual = new Date();
-        String sToken = Miscelanea.getInstance().MD5(objUsuario.getEmail()+dtAtual);
+        String sToken = Miscelanea.getInstance().MD5(objUsuario.getEmail() + dtAtual);
         try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "INSERT INTO thread (idusuario, dtcriacao, dtalteracao, perfil, stoken) VALUES (?, NOW(), NOW(), ?, ?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -71,7 +77,9 @@ public class CtrThread extends Conexao {
      *
      * @param token
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -83,10 +91,10 @@ public class CtrThread extends Conexao {
                     + "FROM thread a "
                     + "LEFT JOIN usuario b ON d.id = a.idusuario "
                     + "WHERE stoken=" + objUsuario.getId();
-            
+
             Statement statement = conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
-            
+
             if (result.next()) {
                 objUsuario.setId(result.getInt(1));
                 objUsuario.setDtNascimento(result.getDate(2));
@@ -104,7 +112,9 @@ public class CtrThread extends Conexao {
      *
      * @param sToken
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0

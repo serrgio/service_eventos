@@ -12,7 +12,9 @@ import java.util.ArrayList;
 /**
  * Classe responsável por conter os as funções referentes as Fotos dos Eventos
  *
- * @author José Sérgio de Souza
+ * @author Bianca Raissa
+ * @author José Sérgio
+ * @author Rafhael Augusto
  * @date 30/06/2016 08:51:43
  * @version 1.0
  */
@@ -25,7 +27,9 @@ public class CtrFotos extends Conexao {
      * Método responsável por criar uma instancia da classe
      *
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
@@ -42,7 +46,9 @@ public class CtrFotos extends Conexao {
      *
      * @param objFotos
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -51,7 +57,7 @@ public class CtrFotos extends Conexao {
         boolean bRetorno = false;
         try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "INSERT INTO fotos(idEvento, nome, descricao, dtFoto) VALUES (?,?,?,NOW())";
-            PreparedStatement statement = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, objFotos.getIdEvento());
             statement.setString(2, objFotos.getNome());
             statement.setString(3, objFotos.getDescricao());
@@ -69,7 +75,9 @@ public class CtrFotos extends Conexao {
      *
      * @param idEvento
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -77,7 +85,7 @@ public class CtrFotos extends Conexao {
     public ArrayList<Fotos> GetFotos(Integer idEvento) throws SQLException {
         ArrayList<Fotos> lstFotos = new ArrayList<>();
         try (Connection conn = Conexao.getInstance().Conectar()) {
-            String sql = "SELECT id, idEvento, nome, descricao, dtFoto FROM fotos WHERE iDevento="+idEvento;
+            String sql = "SELECT id, idEvento, nome, descricao, dtFoto FROM fotos WHERE iDevento=" + idEvento;
 
             Statement statement = conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
@@ -101,7 +109,9 @@ public class CtrFotos extends Conexao {
      *
      * @param idFotos
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0

@@ -7,12 +7,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Classe responsável por conter o Objeto NoticiasEvento
  *
- * @author José Sérgio de Souza
+ * @author Bianca Raissa
+ * @author José Sérgio
+ * @author Rafhael Augusto
  * @date 30/06/2016 08:51:43
  * @version 1.0
  */
 @XmlRootElement
 public class NoticiasEvento {
+
     private Integer id;
     private Integer idEvento;
     private Integer idUsuario;
@@ -117,5 +120,5 @@ public class NoticiasEvento {
     public String toString() {
         return "NoticiasEvento{" + "id=" + id + ", idEvento=" + idEvento + ", idUsuario=" + idUsuario + ", dtCadastro=" + dtCadastro + ", sTitulo=" + sTitulo + ", sDescricao=" + sDescricao + '}';
     }
-   
+
 }

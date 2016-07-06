@@ -6,7 +6,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Classe responsável por conter o Objeto Endereco
  *
- * @author José Sérgio de Souza
+ * @author Bianca Raissa
+ * @author José Sérgio
+ * @author Rafhael Augusto
  * @date 30/06/2016 08:51:43
  * @version 1.0
  */

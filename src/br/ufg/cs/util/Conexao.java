@@ -10,7 +10,9 @@ import java.util.logging.Logger;
  * Classe responsável por conter os as funções referentes a conexão com o banco
  * de dados
  *
- * @author José Sérgio de Souza
+ * @author Bianca Raissa
+ * @author José Sérgio
+ * @author Rafhael Augusto
  * @date 30/06/2016 08:51:43
  * @version 1.0
  */
@@ -23,7 +25,9 @@ public class Conexao {
      * Método responsável por criar uma instancia da classe
      *
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
@@ -39,7 +43,9 @@ public class Conexao {
      * Método responsável por conectar ao banco de dados
      *
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
@@ -56,7 +62,7 @@ public class Conexao {
         try {
             conn = DriverManager.getConnection(myUrl, "root", "");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
         return conn;
     }

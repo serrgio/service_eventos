@@ -7,12 +7,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Classe responsável por conter o Objeto Categorias
  *
- * @author José Sérgio de Souza
+ * @author Bianca Raissa
+ * @author José Sérgio
+ * @author Rafhael Augusto
  * @date 30/06/2016 08:51:43
  * @version 1.0
  */
 @XmlRootElement
 public class Categorias {
+
     private Integer id;
     private String nome;
     private String descricao;
@@ -87,5 +90,5 @@ public class Categorias {
     @Override
     public String toString() {
         return "Categorias{" + "id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dtCadastro=" + dtCadastro + '}';
-    }    
+    }
 }

@@ -10,9 +10,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- * Classe responsável por conter os as funções referentes as Categorias dos Eventos
+ * Classe responsável por conter os as funções referentes as Categorias dos
+ * Eventos
  *
- * @author José Sérgio de Souza
+ * @author Bianca Raissa
+ * @author José Sérgio
+ * @author Rafhael Augusto
  * @date 30/06/2016 08:51:43
  * @version 1.0
  */
@@ -25,7 +28,9 @@ public class CtrCategorias extends Conexao {
      * Método responsável por criar uma instancia da classe
      *
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
@@ -42,7 +47,9 @@ public class CtrCategorias extends Conexao {
      *
      * @param objCategorias
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -51,7 +58,7 @@ public class CtrCategorias extends Conexao {
         boolean bRetorno = false;
         try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "INSERT INTO categorias (nome, descricao, dtCadastro) VALUES (?,?,NOW())";
-            PreparedStatement statement = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, objCategorias.getNome());
             statement.setString(2, objCategorias.getDescricao());
             int rowsInserted = statement.executeUpdate();
@@ -64,10 +71,13 @@ public class CtrCategorias extends Conexao {
 
     /**
      *
-     * Método responsável por buscar uma lista de categorias de eventos no banco de dados
+     * Método responsável por buscar uma lista de categorias de eventos no banco
+     * de dados
      *
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -98,7 +108,9 @@ public class CtrCategorias extends Conexao {
      *
      * @param objCategorias
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -127,7 +139,9 @@ public class CtrCategorias extends Conexao {
      *
      * @param idCategorias
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0

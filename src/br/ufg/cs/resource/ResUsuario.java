@@ -16,7 +16,9 @@ import javax.ws.rs.core.MediaType;
 /**
  * Classe responsável por conter os Resources dos Usuario
  *
- * @author José Sérgio de Souza
+ * @author Bianca Raissa
+ * @author José Sérgio
+ * @author Rafhael Augusto
  * @date 30/06/2016 08:51:43
  * @version 1.0
  */
@@ -29,7 +31,9 @@ public class ResUsuario {
      *
      * @param jsonUsuario
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -50,7 +54,9 @@ public class ResUsuario {
      *
      * @param token
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -69,7 +75,9 @@ public class ResUsuario {
      * @param token
      * @param jsonUsuario
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -90,7 +98,9 @@ public class ResUsuario {
      *
      * @param token
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -101,7 +111,7 @@ public class ResUsuario {
     public boolean DeleteUsuario(@PathParam("id") String token) throws SQLException {
         return new CtrUsuario().DeleteUsuario(token);
     }
-    
+
     /**
      *
      * Resources que exclui um usuario no banco de dados
@@ -109,7 +119,9 @@ public class ResUsuario {
      * @param email
      * @param senha
      * @return
-     * @author José Sérgio de Souza
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
      * @throws java.sql.SQLException
      * @date 30/06/2016 08:51:43
      * @version 1.0
@@ -117,7 +129,7 @@ public class ResUsuario {
     @GET
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
-    public String Logar(@PathParam("id1") String email,@PathParam("id2") String senha) throws SQLException {
+    public String Logar(@PathParam("id1") String email, @PathParam("id2") String senha) throws SQLException {
         return new Login().Logar(email, senha);
     }
 }
