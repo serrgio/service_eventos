@@ -1,7 +1,5 @@
 package br.ufg.cs.controller;
 
-import br.ufg.cs.model.Categorias;
-import br.ufg.cs.model.Endereco;
 import br.ufg.cs.model.Evento;
 import br.ufg.cs.util.Conexao;
 import java.sql.Connection;
