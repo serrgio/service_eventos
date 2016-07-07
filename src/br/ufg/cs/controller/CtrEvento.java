@@ -58,14 +58,13 @@ public class CtrEvento extends Conexao {
     public Integer InsertEvento(Evento objEvento) throws SQLException {
         Integer rowsInserted = 0;
         try (Connection conn = Conexao.getInstance().Conectar()) {
-            String sql = "INSERT INTO evento(idCategoria, idUsuario, nome, descricao, idEndereco, dtEvento) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO evento(idCategoria, nome, descricao, idEndereco, dtEvento) VALUES (?,?,?,?,?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setInt(1, objEvento.getIdCategoria());
-            statement.setInt(2, objEvento.getIdUsuario());
-            statement.setString(3, objEvento.getNome());
-            statement.setString(4, objEvento.getDescricao());
-            statement.setInt(5, CtrEndereco.getInstance().InsertEndereco(objEvento.getEndereco()));
-            statement.setDate(6, (Date) Miscelanea.getInstance().ConverterData(objEvento.getDtEvento()));
+            statement.setInt(1, objEvento.getIdCategoria());            
+            statement.setString(2, objEvento.getNome());
+            statement.setString(3, objEvento.getDescricao());
+            statement.setInt(4, CtrEndereco.getInstance().InsertEndereco(objEvento.getEndereco()));
+            statement.setDate(5, (Date) Miscelanea.getInstance().ConverterData(objEvento.getDtEvento()));
             statement.execute();
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
