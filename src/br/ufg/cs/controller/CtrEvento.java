@@ -56,7 +56,6 @@ public class CtrEvento extends Conexao {
      */
     public Integer InsertEvento(Evento objEvento) throws SQLException {
         Integer rowsInserted = 0;
-        Integer iEndereco = CtrEndereco.getInstance().InsertEndereco(objEvento.getEndereco());
         try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "INSERT INTO evento(idCategoria, idUsuario, nome, descricao, idEndereco, dtEvento) VALUES (?,?,?,?,?,?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -64,10 +63,15 @@ public class CtrEvento extends Conexao {
             statement.setInt(2, objEvento.getIdUsuario());
             statement.setString(3, objEvento.getNome());
             statement.setString(4, objEvento.getDescricao());
-            statement.setInt(5, iEndereco);
+            statement.setInt(5, CtrEndereco.getInstance().InsertEndereco(objEvento.getEndereco()));
             statement.setDate(6, (Date) objEvento.getDtEvento());
-            rowsInserted = statement.executeUpdate();
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                rowsInserted = generatedKeys.getInt(1);
+            }
         }
+        objEvento.getFoto().setIdEvento(rowsInserted);
+        CtrFotos.getInstance().InsertFotos(objEvento.getFoto());
         return rowsInserted;
     }
 
@@ -136,6 +140,7 @@ public class CtrEvento extends Conexao {
                 objEvento.setEndereco(CtrEndereco.getInstance().GetEndereco(result.getInt(6)));
                 objEvento.setDtEvento(result.getDate(7));
                 objEvento.setFoto(CtrFotos.getInstance().GetFotos(objEvento.getId()));
+                
                 lstEvento.add(objEvento);
             }
         }

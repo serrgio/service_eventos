@@ -21,7 +21,7 @@ public class Fotos {
     private String nome;
     private String descricao;
     private Date dtFoto;
-    private String foto;
+    private String Base64;
 
     public Integer getId() {
         return id;
@@ -63,12 +63,12 @@ public class Fotos {
         this.dtFoto = dtFoto;
     }
 
-    public String getFoto() {
-        return foto;
+    public String getBase64() {
+        return Base64;
     }
 
-    public void setFoto(String foto) {
-        this.foto = foto;
+    public void setBase64(String Base64) {
+        this.Base64 = Base64;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Fotos {
         hash = 89 * hash + Objects.hashCode(this.nome);
         hash = 89 * hash + Objects.hashCode(this.descricao);
         hash = 89 * hash + Objects.hashCode(this.dtFoto);
-        hash = 89 * hash + Objects.hashCode(this.foto);
+        hash = 89 * hash + Objects.hashCode(this.Base64);
         return hash;
     }
 
@@ -101,7 +101,7 @@ public class Fotos {
         if (!Objects.equals(this.descricao, other.descricao)) {
             return false;
         }
-        if (!Objects.equals(this.foto, other.foto)) {
+        if (!Objects.equals(this.Base64, other.Base64)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
@@ -115,6 +115,6 @@ public class Fotos {
 
     @Override
     public String toString() {
-        return "Fotos{" + "id=" + id + ", idEvento=" + idEvento + ", nome=" + nome + ", descricao=" + descricao + ", dtFoto=" + dtFoto + ", foto=" + foto + '}';
+        return "Fotos{" + "id=" + id + ", idEvento=" + idEvento + ", nome=" + nome + ", descricao=" + descricao + ", dtFoto=" + dtFoto + ", Base64=" + Base64 + '}';
     }
 }

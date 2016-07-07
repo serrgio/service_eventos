@@ -35,7 +35,6 @@ public class ResEvento {
      *
      * Resources que insere um evento no banco de dados
      *
-     * @param token
      * @param jsonEvento
      * @return
      * @author Bianca Raissa

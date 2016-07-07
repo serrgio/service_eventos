@@ -24,7 +24,7 @@ public class Evento {
     private String descricao;
     private Endereco endereco;
     private Date dtEvento;
-    private ArrayList<Fotos> foto;
+    private Fotos foto;
 
     public Integer getId() {
         return id;
@@ -82,11 +82,11 @@ public class Evento {
         this.dtEvento = dtEvento;
     }
 
-    public ArrayList<Fotos> getFoto() {
+    public Fotos getFoto() {
         return foto;
     }
 
-    public void setFoto(ArrayList<Fotos> foto) {
+    public void setFoto(Fotos foto) {
         this.foto = foto;
     }
 
