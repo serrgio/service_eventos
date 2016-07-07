@@ -21,7 +21,7 @@ public class Fotos {
     private String nome;
     private String descricao;
     private Date dtFoto;
-    private String Base64;
+    private String foto;
 
     public Integer getId() {
         return id;
@@ -63,23 +63,23 @@ public class Fotos {
         this.dtFoto = dtFoto;
     }
 
-    public String getBase64() {
-        return Base64;
+    public String getFoto() {
+        return foto;
     }
 
-    public void setBase64(String Base64) {
-        this.Base64 = Base64;
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        hash = 89 * hash + Objects.hashCode(this.idEvento);
-        hash = 89 * hash + Objects.hashCode(this.nome);
-        hash = 89 * hash + Objects.hashCode(this.descricao);
-        hash = 89 * hash + Objects.hashCode(this.dtFoto);
-        hash = 89 * hash + Objects.hashCode(this.Base64);
+        hash = 59 * hash + Objects.hashCode(this.id);
+        hash = 59 * hash + Objects.hashCode(this.idEvento);
+        hash = 59 * hash + Objects.hashCode(this.nome);
+        hash = 59 * hash + Objects.hashCode(this.descricao);
+        hash = 59 * hash + Objects.hashCode(this.dtFoto);
+        hash = 59 * hash + Objects.hashCode(this.foto);
         return hash;
     }
 
@@ -101,7 +101,7 @@ public class Fotos {
         if (!Objects.equals(this.descricao, other.descricao)) {
             return false;
         }
-        if (!Objects.equals(this.Base64, other.Base64)) {
+        if (!Objects.equals(this.foto, other.foto)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
@@ -110,11 +110,11 @@ public class Fotos {
         if (!Objects.equals(this.idEvento, other.idEvento)) {
             return false;
         }
-        return Objects.equals(this.dtFoto, other.dtFoto);
+        if (!Objects.equals(this.dtFoto, other.dtFoto)) {
+            return false;
+        }
+        return true;
     }
 
-    @Override
-    public String toString() {
-        return "Fotos{" + "id=" + id + ", idEvento=" + idEvento + ", nome=" + nome + ", descricao=" + descricao + ", dtFoto=" + dtFoto + ", Base64=" + Base64 + '}';
-    }
+    
 }

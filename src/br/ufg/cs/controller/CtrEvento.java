@@ -2,6 +2,7 @@ package br.ufg.cs.controller;
 
 import br.ufg.cs.model.Evento;
 import br.ufg.cs.util.Conexao;
+import br.ufg.cs.util.Miscelanea;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -64,7 +65,8 @@ public class CtrEvento extends Conexao {
             statement.setString(3, objEvento.getNome());
             statement.setString(4, objEvento.getDescricao());
             statement.setInt(5, CtrEndereco.getInstance().InsertEndereco(objEvento.getEndereco()));
-            statement.setDate(6, (Date) objEvento.getDtEvento());
+            statement.setDate(6, (Date) Miscelanea.getInstance().ConverterData(objEvento.getDtEvento()));
+            statement.execute();
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 rowsInserted = generatedKeys.getInt(1);

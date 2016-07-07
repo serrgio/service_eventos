@@ -60,7 +60,7 @@ public class CtrFotos extends Conexao {
             statement.setInt(1, objFotos.getIdEvento());
             statement.setString(2, objFotos.getNome());
             statement.setString(3, objFotos.getDescricao());
-            statement.setString(4, objFotos.getBase64());
+            statement.setString(4, objFotos.getFoto());
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
                 bRetorno = true;
@@ -96,7 +96,7 @@ public class CtrFotos extends Conexao {
                 objFotos.setNome(result.getString(3));
                 objFotos.setDescricao(result.getString(4));
                 objFotos.setDtFoto(result.getDate(5));
-                objFotos.setBase64(result.getString(6));
+                objFotos.setFoto(result.getString(6));
             }
         }
         return objFotos;
