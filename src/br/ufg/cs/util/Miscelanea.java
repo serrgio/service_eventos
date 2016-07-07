@@ -41,7 +41,7 @@ public class Miscelanea {
         try {
             md5 = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
         md5.update(value.getBytes());
         BigInteger bigInteger = new BigInteger(1, md5.digest());
