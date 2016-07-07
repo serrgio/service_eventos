@@ -3,7 +3,7 @@ package br.ufg.cs.resource;
 import br.ufg.cs.controller.CtrCategorias;
 import br.ufg.cs.controller.CtrEvento;
 import br.ufg.cs.controller.CtrFotos;
-import br.ufg.cs.controller.CtrThread;
+import br.ufg.cs.controller.CtrUsuario;
 import br.ufg.cs.model.Categorias;
 import br.ufg.cs.model.Evento;
 import br.ufg.cs.model.Fotos;
@@ -49,7 +49,7 @@ public class ResEvento {
     @Path("/insert")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
     @Consumes(MediaType.APPLICATION_JSON + "; charset=UTF-8")
-    public Integer InsertEvento(@PathParam("id") String token, String jsonEvento) throws SQLException {
+    public Integer InsertEvento(String jsonEvento) throws SQLException {
         Gson gson = new Gson();
         Evento objEvento = gson.fromJson(jsonEvento, Evento.class);
         return new CtrEvento().InsertEvento(objEvento);
@@ -253,11 +253,30 @@ public class ResEvento {
     public boolean UpdateCategorias(@PathParam("id") String token, String jsonCategorias) throws SQLException {
         Gson gson = new Gson();
         Categorias objCategorias = gson.fromJson(jsonCategorias, Categorias.class);
-        Usuario objUsuario = CtrThread.getInstance().GetThread(token);
+        Usuario objUsuario = CtrUsuario.getInstance().GetUsuario(token);
         if (objUsuario.getId() != null) {
             return new CtrCategorias().UpdateCategorias(objCategorias);
         } else {
             return false;
         }
+    }
+    
+    /**
+     *
+     * Resources que busca uma lista de categorias
+     *
+     * @return
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
+     * @throws java.sql.SQLException
+     * @date 30/06/2016 08:51:43
+     * @version 1.0
+     */
+    @GET
+    @Path("/getLstCategorias")
+    @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+    public ArrayList<Categorias> GetLstEventos() throws SQLException {
+        return new CtrCategorias().GetCategorias();
     }
 }

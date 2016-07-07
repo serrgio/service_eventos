@@ -1,6 +1,7 @@
 package br.ufg.cs.resource;
 
 import br.ufg.cs.controller.CtrUsuario;
+import br.ufg.cs.model.Token;
 import br.ufg.cs.model.Usuario;
 import br.ufg.cs.util.Login;
 import com.google.gson.Gson;
@@ -52,7 +53,7 @@ public class ResUsuario {
      *
      * Resources que busca um usuario no banco de dados
      *
-     * @param token
+     * @param jsonToken
      * @return
      * @author Bianca Raissa
      * @author José Sérgio
@@ -61,11 +62,14 @@ public class ResUsuario {
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
-    @GET
-    @Path("/get")
+    @POST
+    @Path("/buscar")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
-    public Usuario cadUsuario(@PathParam("id") String token) throws SQLException {
-        return new CtrUsuario().GetUsuario(token);
+    @Consumes(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+    public Usuario cadUsuario(String jsonToken) throws SQLException {
+        Gson gson = new Gson();
+        Token objToken = gson.fromJson(jsonToken, Token.class);
+        return new CtrUsuario().GetUsuario(objToken.getValor());
     }
 
     /**
@@ -96,8 +100,7 @@ public class ResUsuario {
      *
      * Resources que exclui um usuario no banco de dados
      *
-     * @param token
-     * @return
+     * @param jsonToken
      * @author Bianca Raissa
      * @author José Sérgio
      * @author Rafhael Augusto
@@ -105,19 +108,20 @@ public class ResUsuario {
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
-    @GET
+    @POST
     @Path("/delete")
-    @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
-    public boolean DeleteUsuario(@PathParam("id") String token) throws SQLException {
-        return new CtrUsuario().DeleteUsuario(token);
+    @Consumes(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+    public void DeleteUsuario(String jsonToken) throws SQLException {
+        Gson gson = new Gson();
+        Token objToken = gson.fromJson(jsonToken, Token.class);
+        new CtrUsuario().DeleteUsuario(objToken.getValor());
     }
 
     /**
      *
      * Resources que exclui um usuario no banco de dados
      *
-     * @param email
-     * @param senha
+     * @param jsonUsuario
      * @return
      * @author Bianca Raissa
      * @author José Sérgio
@@ -126,10 +130,14 @@ public class ResUsuario {
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
-    @GET
+    @POST
     @Path("/login")
-    @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
-    public String Logar(@PathParam("id1") String email, @PathParam("id2") String senha) throws SQLException {
-        return new Login().Logar(email, senha);
+    @Produces(MediaType.TEXT_PLAIN + "; charset=UTF-8")
+    @Consumes(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+    public String Logar(String jsonUsuario) throws SQLException {
+        Gson gson = new Gson();
+        System.out.println(jsonUsuario);
+        Usuario objUsuario = gson.fromJson(jsonUsuario, Usuario.class);
+        return new Login().Logar(objUsuario.getEmail(), objUsuario.getSenha());
     }
 }

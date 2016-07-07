@@ -55,7 +55,7 @@ public class CtrEndereco extends Conexao {
     public Integer InsertEndereco(Endereco objEndereco) throws SQLException {
         Integer rowsInserted = 0;
         try (Connection conn = Conexao.getInstance().Conectar()) {
-            String sql = "INSERT INTO endereco(cep, logradouro, complemento, bairro, localidade, uf, ibge) VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO endereco(cep, logradouro, complemento, bairro, localidade, uf) VALUES (?,?,?,?,?,?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, objEndereco.getCep());
             statement.setString(2, objEndereco.getLogradouro());
@@ -63,8 +63,11 @@ public class CtrEndereco extends Conexao {
             statement.setString(4, objEndereco.getBairro());
             statement.setString(5, objEndereco.getLocalidade());
             statement.setString(6, objEndereco.getUf());
-            statement.setInt(7, objEndereco.getIbge());
-            rowsInserted = statement.executeUpdate();
+            statement.executeUpdate();
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                rowsInserted = generatedKeys.getInt(1);
+            }
         }
         return rowsInserted;
     }

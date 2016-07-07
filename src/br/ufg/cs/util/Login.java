@@ -55,17 +55,17 @@ public class Login extends Conexao {
     public String Logar(String email, String senha) throws SQLException {
         String sToken = "";
         try (Connection conn = Conexao.getInstance().Conectar()) {
-            String sql = "SELECT id, email, senha"
-                    + "FROM usuario a "
-                    + "WHERE email=" + email
-                    + "AND senha" + senha;
+            String sql = "SELECT id, email, perfil"
+                    + " FROM usuario"
+                    + " WHERE email='" + email+"'"
+                    + " AND senha='" + senha+"'";
             Statement statement = conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
             Usuario objUsuario = new Usuario();
             if (result.next()) {
                 objUsuario.setId(result.getInt(1));
-                objUsuario.setEmail(result.getString(3));
-                objUsuario.setPerfil(result.getInt(6));
+                objUsuario.setEmail(result.getString(2));
+                objUsuario.setPerfil(result.getInt(3));
             }
             if (objUsuario.getId() != null) {
                 sToken = CtrThread.getInstance().InsertThread(objUsuario);

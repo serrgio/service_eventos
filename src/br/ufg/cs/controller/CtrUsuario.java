@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import br.ufg.cs.util.Conexao;
 import br.ufg.cs.util.Miscelanea;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Classe responsável por conter os as funções referentes ao Usuario
@@ -57,13 +59,14 @@ public class CtrUsuario extends Conexao {
     public boolean InsertUsuario(Usuario objUsuario) throws SQLException {
         boolean bRetorno = false;
         try (Connection conn = Conexao.getInstance().Conectar()) {
-            String sql = "INSERT INTO Usuario (nome, senha, email, dtNascimento, perfil) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Usuario (nome, senha, email, dtNascimento, perfil, idEndereco) VALUES (?, ?, ?, ?, ?, ?)";
             try (PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 statement.setString(1, objUsuario.getNome());
                 statement.setString(2, objUsuario.getSenha());
                 statement.setString(3, objUsuario.getEmail());
                 statement.setDate(4, (Date) Miscelanea.getInstance().ConverterData(objUsuario.getDtNascimento()));
                 statement.setInt(5, objUsuario.getPerfil());
+                statement.setInt(6, CtrEndereco.getInstance().InsertEndereco(objUsuario.getEndereco()));
                 statement.executeUpdate();
                 ResultSet generatedKeys = statement.getGeneratedKeys();
                 if (generatedKeys.next()) {
@@ -89,9 +92,11 @@ public class CtrUsuario extends Conexao {
      * @version 1.0
      */
     public Usuario GetUsuario(String token) throws SQLException {
-        Usuario objUsuario = CtrThread.getInstance().GetThread(token);
+        Usuario objUsuario = new Usuario();
+        Integer idUsuario = CtrThread.getInstance().GetThread(token);
+        objUsuario.setId(idUsuario);
         try (Connection conn = Conexao.getInstance().Conectar()) {
-            String sql = "SELECT nome, email, dtNascimento, perfil FROM Usuario WHERE id=" + objUsuario.getEmail();
+            String sql = "SELECT nome, email, dtNascimento, perfil, idendereco FROM Usuario WHERE id=" + idUsuario;
 
             Statement statement = conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
@@ -101,6 +106,11 @@ public class CtrUsuario extends Conexao {
                 objUsuario.setEmail(result.getString(2));
                 objUsuario.setDtNascimento(result.getDate(3));
                 objUsuario.setPerfil(result.getInt(4));
+                int aux = result.getInt(5);
+                if (aux > 0) {
+                    objUsuario.setEndereco(CtrEndereco.getInstance().GetEndereco(aux));
+                }
+
             }
         }
         return objUsuario;
@@ -146,7 +156,6 @@ public class CtrUsuario extends Conexao {
      * Método responsável por excluir um usuário no banco de dados
      *
      * @param token
-     * @return
      * @author Bianca Raissa
      * @author José Sérgio
      * @author Rafhael Augusto
@@ -154,19 +163,14 @@ public class CtrUsuario extends Conexao {
      * @date 15/06/2016 14:47:43
      * @version 1.0
      */
-    public boolean DeleteUsuario(String token) throws SQLException {
-        boolean bRetorno = false;
-        Usuario objUsuario = CtrThread.getInstance().GetThread(token);
+    public void DeleteUsuario(String token) throws SQLException {
+        Usuario objUsuario = new Usuario();
+        objUsuario.setId(CtrThread.getInstance().GetThread(token));
         try (Connection conn = Conexao.getInstance().Conectar()) {
             String sql = "DELETE FROM Usuario WHERE id=?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setLong(1, objUsuario.getId());
-
-            int rowsDeleted = statement.executeUpdate();
-            if (rowsDeleted > 0) {
-                bRetorno = true;
-            }
+            statement.executeUpdate();
         }
-        return bRetorno;
     }
 }

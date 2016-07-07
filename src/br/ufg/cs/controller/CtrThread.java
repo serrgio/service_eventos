@@ -58,14 +58,15 @@ public class CtrThread extends Conexao {
         Date dtAtual = new Date();
         String sToken = Miscelanea.getInstance().MD5(objUsuario.getEmail() + dtAtual);
         try (Connection conn = Conexao.getInstance().Conectar()) {
-            String sql = "INSERT INTO thread (idusuario, dtcriacao, dtalteracao, perfil, stoken) VALUES (?, NOW(), NOW(), ?, ?)";
-            PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setInt(1, objUsuario.getId());
-            statement.setInt(2, objUsuario.getPerfil());
-            statement.setString(3, sToken);
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted == 0) {
-                sToken = "";
+            String sql = "INSERT INTO thread (idusuario, dtcriacao, dtalteracao, perfil, stoken, status) VALUES (?, NOW(), NOW(), ?, ?, ?)";
+            try (PreparedStatement statement = conn.prepareStatement(sql)) {
+                statement.setInt(1, objUsuario.getId());
+                statement.setInt(2, objUsuario.getPerfil());
+                statement.setString(3, sToken);
+                statement.setInt(4, 1);
+                if (statement.execute()) {
+                    System.out.println("OK");
+                }
             }
         }
         return sToken;
@@ -84,26 +85,17 @@ public class CtrThread extends Conexao {
      * @date 30/06/2016 08:51:43
      * @version 1.0
      */
-    public Usuario GetThread(String token) throws SQLException {
-        Usuario objUsuario = CtrThread.getInstance().GetThread(token);
+    public Integer GetThread(String token) throws SQLException {
+        Integer iRetorno = null;
         try (Connection conn = Conexao.getInstance().Conectar()) {
-            String sql = "SELECT idusuario, dtnascimento, email, idendereco, nome, perfil "
-                    + "FROM thread a "
-                    + "LEFT JOIN usuario b ON d.id = a.idusuario "
-                    + "WHERE stoken=" + objUsuario.getId();
-
+            String sql = "SELECT idusuario FROM thread WHERE stoken='" + token +"'";
             Statement statement = conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
-
             if (result.next()) {
-                objUsuario.setId(result.getInt(1));
-                objUsuario.setDtNascimento(result.getDate(2));
-                objUsuario.setEmail(result.getString(3));
-                objUsuario.setNome(result.getString(5));
-                objUsuario.setPerfil(result.getInt(6));
+                iRetorno = result.getInt(1);
             }
         }
-        return objUsuario;
+        return iRetorno;
     }
 
     /**
@@ -133,5 +125,24 @@ public class CtrThread extends Conexao {
             }
         }
         return bRetorno;
+    }
+
+    /**
+     *
+     * Método responsável por alterar uma thread no banco de dados
+     *
+     * @author Bianca Raissa
+     * @author José Sérgio
+     * @author Rafhael Augusto
+     * @throws java.sql.SQLException
+     * @date 30/06/2016 08:51:43
+     * @version 1.0
+     */
+    public void StatusThread() throws SQLException {
+        try (Connection conn = Conexao.getInstance().Conectar()) {
+            String sql = "UPDATE thread SET status=0 WHERE TIMESTAMPDIFF(MINUTE,dtAlteracao,NOW()) > 30";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.execute();
+        }
     }
 }
